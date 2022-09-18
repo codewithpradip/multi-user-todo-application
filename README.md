@@ -1,5 +1,5 @@
 # MUTA - Multi User Todo Application
-Muta is a Django Based todo application. It suits the best for Django beginner who wants to make a career in Django. If you are looking a beginner-friendly Django project. This project may be helpfull for you to improve your Django Skill.
+Muta is a Django Based todo application. It suits the best for Django beginner who wants to make a career in Django. If you are looking a beginner-friendly Django project. This project may be helpful for you to improve your Django skills.
 
 # How To Use
 1. Clone the repo
