@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+{% load static %}
+    {% block content %}
+    <!-- User Login -->
+    <div class="container ">
+      <div class="row justify-content-center mt-5">
+          <div class="col-sm-6">
+            {% if messages %}
+              {% for message in messages %}
+              {% if  message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Sorry!</strong> {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% else %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Congratulation!</strong> {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endif  %}
+              {% endfor %}
+            {% endif %}
+
+              <form class="bg-light p-4 rounded" method="post" novalidate >
+                {% csrf_token %}
+                  <fieldset>
+                    <legend>Login</legend>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+                      {{form.username}}
+                      {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                      {{form.password}}
+                      {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                  </fieldset>
+                </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}

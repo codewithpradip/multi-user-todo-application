@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Home
+<div class="card mb-3 text-center my-auto">
+  <img src="{% static 'pythonpng' %}" class="card-img-top img-fluid" alt="">
+  <div class="card-body">
+    <h5 class="card-title">Welcome To Muta</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+  </div>
+</div> -->
+
+<!-- User Login -->
+<div class="container ">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Congratulation!</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <div class="row mt-5">
+      <div class="col-sm-4">
+        <form class="bg-light p-4 rounded" action="/add_todo/" method="post" novalidate >
+          {% csrf_token %}
+            <fieldset>
+              <legend>Add New Todo</legend>
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">Title:</label>
+                {{form.title}}
+              </div>
+                <div class="form-group">
+                  <label for="exampleSelect1" class="form-label mt-4">Status:</label>
+                  {{form.status}}
+                </div>
+                <div class="form-group">
+                  <label for="exampleSelect1" class="form-label mt-4">Priority:</label>
+                  {{form.priority}}
+              <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </fieldset>
+          </form>
+      </div>
+      <div class="col-sm-8 ">
+        <table class="table table-hover bg-light">
+          <thead>
+            <tr>
+              <th scope="col">SN</th>
+              <th scope="col">Title</th>
+              <th scope="col">Statu</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          {% if todo|length == 0 %}
+          <div class="alert alert-primary text-center" role="alert">
+            No Recods Found !!
+          </div>
+          {% else %}
+          <tbody>
+            {% for todo in todo %}
+            <tr class="">
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{todo.title}}</td>
+              <td>{{todo.status}}</td>
+              <td>{{todo.priority}}</td>
+              <td class="">
+                <a href="/delete_todo/{{todo.id}}" title="Delete Tode!" class="btn btn-danger me-3"><i class="fa-solid fa-trash"></i></a>
+                {% if todo.status == 'P' %}
+                <a href="/change_todo_status/{{todo.id}}/C" title="Mark Completed!" class="btn btn-success"><i class="fa-sharp fa-solid fa-circle-check"></i></a>
+                {% else %}
+                <a href="/change_todo_status/{{todo.id}}/P" title="Mark Pending!" class="btn btn-primary"><i class="fa-solid fa-circle-xmark"></i></a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% endif %}
+        </table>
+      </div>
+  </div>
+</div>
+{% endblock %}

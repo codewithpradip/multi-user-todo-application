@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+{% load static %}
+    {% block content %}
+    <!-- User Singup -->
+    <div class="container ">
+      <div class="row justify-content-center my-4">
+          <div class="col-sm-6">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endfor %}
+            {% endif %}
+              <form class="bg-light p-4 " method="post" novalidate>
+                  {% csrf_token %}
+                  <fieldset>
+                    <legend>Signup</legend>
+
+                    <div class="form-group">
+                      <label for="exampleInputName1" class="form-label mt-4">First Name</label>
+                      {{form.first_name}}
+                      {% if form.first_name.errors %}
+                        {% for error in form.first_name.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputName1" class="form-label mt-4">Last Name</label>
+                      {{form.last_name}}
+                      {% if form.last_name.errors %}
+                        {% for error in form.last_name.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+                      {{form.username}}
+                      {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                      {{form.email}}
+                      {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                      {{form.password1}}
+                      {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword2" class="form-label mt-4">Confirm Password</label>
+                      {{form.password2}}
+                      {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                        <div class="alert alert-danger">
+                          <strong>{{error|escape}}</strong>
+                        </div>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                  </fieldset>
+              </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}

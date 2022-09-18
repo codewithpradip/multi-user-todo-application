@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+
+    <!-- Google Font  -->
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+    <title>Muta</title>
+    <style>
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .h-font{
+        font-family: 'Merienda', cursive;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand ms-4 h-font fs-3" href="/">Muta</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor03"
+          aria-controls="navbarColor03"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor03">
+          <ul class="navbar-nav me-auto ms-4">
+            <li class="nav-item">
+              {% if request.user.is_authenticated %}
+              <a class="nav-link active" href="{% url 'index'%}"
+                >Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+              {% else %}
+              <a class="nav-link active" href="{% url 'home'%}">
+                Home
+                <span class="visually-hidden">(current)</span>
+              </a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Blogs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            
+          </ul>
+          
+          <ul class="navbar-nav ms-auto me-4">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active btn" href="{% url 'index'%}"> <strong>Welcome :</strong> {{user}}</a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'user_logout'%}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'user_signup'%}"><i class="fa-solid fa-user"></i> Signup</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'user_login'%}"><i class="fa-solid fa-user"></i> Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="mt-auto mb-2">
+      <div class="text-center">
+        <span>
+          Copyright &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          Code With Pradip.
+        </span>
+      </div>
+    </footer>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var select = document.getElementsByTagName('select');
+      for (var i = 0; i < select.length; i++) {
+      select[i].classList.add('form-control', 'shadow-none');
+      }
+    </script>
+  </body>
+</html>
